@@ -570,58 +570,6 @@ namespace temperature
             Console.ReadKey();
 
         }
-        /*static void TopDifference1()
-        {
-            using (var context = new EFContext())
-            {
-                //Create InsideList
-                var insideList = context.Inside
-                    .AsEnumerable().GroupBy(x =>
-                    {
-                        var stamp = x.Date;
-                        stamp = stamp.AddMinutes(-(stamp.Minute % 5));
-                        stamp = stamp.AddMilliseconds(-stamp.Millisecond - 1000 * stamp.Second);
-                        return stamp;
-                    })
-                    .Select(g => new { Date = g.Key, AvergeTemperature = g.Average(s => s.Temperature) })
-                    .OrderBy(x => x.Date)
-                    .ToList();
-
-                //Create OutsideList
-                var outsideList = context.Outside
-                    .AsEnumerable().GroupBy(x =>
-                    {
-                        var stamp = x.Date;
-                        stamp = stamp.AddMinutes(-(stamp.Minute % 5));
-                        stamp = stamp.AddMilliseconds(-stamp.Millisecond - 1000 * stamp.Second);
-                        return stamp;
-                    })
-                    .Select(g => new { Date = g.Key, AvergeTemperature = g.Average(s => s.Temperature) })
-                    .OrderBy(x => x.Date)
-                    .ToList();
-
-                List<DoorData> differnceList = new List<DoorData>();
-
-                foreach (var insideData in insideList)
-                {
-                    var outsideData = outsideList.Find(x => x.Date == insideData.Date);
-                    if (outsideData != null)
-                    {
-                        double difference = Math.Abs(insideData.AvergeTemperature - outsideData.AvergeTemperature);
-                        DoorData toAdd = new DoorData(insideData.Date, difference);
-                        differnceList.Add(toAdd);
-
-                    }
-                }
-
-                differnceList = differnceList.OrderBy(x => x.Temperature).ToList();
-
-                foreach (var data in differnceList)
-                {
-                    Console.WriteLine(data.Date + " " + data.Temperature);
-                }
-            }
-        }*/
         static void TopDifference(bool highest)
         {
             Console.Clear();
